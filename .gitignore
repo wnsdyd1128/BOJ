@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BOJ_9095(US).cpp
+/BOJ_1106(US).cpp

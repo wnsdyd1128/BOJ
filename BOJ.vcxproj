@@ -154,6 +154,10 @@
       </SubType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="BOJ_1181.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BOJ_1912.cpp">
       <SubType>
       </SubType>
@@ -368,6 +372,7 @@
     <ClCompile Include="BOJ_2869.cpp">
       <SubType>
       </SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="BOJ_2908.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

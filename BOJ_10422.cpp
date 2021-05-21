@@ -21,6 +21,19 @@ typedef vector<int> vi;
 //Catalan Number
 //DP[n] = 괄호 n쌍을 사용했을 때의 VPS 개수 
 ll DP[5001];
+
+ll solution(int n) {
+	if (n == 0 || n == 1)
+		return 1;
+	ll& ret = DP[n];
+	if (ret != -1)
+		return ret;
+	ret = 0;
+	for (int i = 1; i < n; i++) {
+		ret += (solution(i) * solution(n - i - 1)) % MOD;
+	}
+	return ret %= MOD;
+}
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);

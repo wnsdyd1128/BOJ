@@ -428,6 +428,10 @@
     <ClCompile Include="BOJ_1978.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="BOJ_2193.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BOJ_2231.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

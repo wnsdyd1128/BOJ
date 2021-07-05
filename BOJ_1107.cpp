@@ -24,8 +24,8 @@ int check(int num) {
 	return len;
 }
 int check(string str) {
-	for (int i = 0; i < str.length(); i++) {
-		if (brokenButton[str.at(i)])
+	for (unsigned int i = 0; i < str.length(); i++) {
+		if (brokenButton[static_cast<int>(str.at(i))])
 			return 0;
 	}
 	return str.length();
@@ -46,6 +46,7 @@ int main() {
 	for (int i = 0; i <= 1000000; i++) {
 		int newChannel = i;
 		int len = check(newChannel);
+		//int len = check(to_string(newChannel));
 		if (len > 0) {
 			int cnt = abs(newChannel - N);
 			ans = min(ans, len + cnt);

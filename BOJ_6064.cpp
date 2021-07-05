@@ -25,6 +25,7 @@ int main() {
 			if (k % N == y) {
 				cout << k + 1 << endl;
 				flag = true;
+				break;
 			}
 		}
 		if (!flag)

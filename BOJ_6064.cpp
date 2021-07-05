@@ -21,7 +21,7 @@ int main() {
 		x--;
 		y--;
 		bool flag = false;
-		for (int k = x; k < M * N; k += M) {
+		for (int k = x; k < M * N; k += M) { // 배수 관계를 이용해서 접근
 			if (k % N == y) {
 				cout << k + 1 << endl;
 				flag = true;

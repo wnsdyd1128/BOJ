@@ -16,6 +16,32 @@ bool isVowel(char ch) {
 		return true;
 	return false;
 }
+
+//bool check(string& str) {
+//	int ja = 0;
+//	int mo = 0;
+//	for (char x : str) {
+//		if (x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u') {
+//			mo++;
+//		}
+//		else
+//			ja++;
+//	}
+//	return ja >= 2 && mo >= 1;
+//}
+//void solution(int n, vector<char>& alpha, string password, int i) {
+//	if (password.length() == n) {
+//		if (check(password)) {
+//			cout << password << endl;
+//		}
+//		return;
+//	}
+//	if (i >= alpha.size()) {
+//		return;
+//	}
+//	solution(n, alpha, password + alpha[i], i + 1);
+//	solution(n, alpha, password, i + 1);
+//}
 void solution(int idx, int selected, string str, int countVowels, int countConsonants) {
 	if (selected == L) {
 		bool isOk = (countVowels >= 1 && countConsonants >= 2);

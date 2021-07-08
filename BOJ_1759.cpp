@@ -57,15 +57,14 @@ void solution(int idx, int selected, string str, int countVowels, int countConso
 	}
 	if (idx >= input.length())
 		return;
-	if (!selected || (str.at(selected - 1) != ' ' && str.at(selected - 1) < input.at(idx))) {
-		if (isVowel(input.at(idx))) {
-			str.at(selected) = input.at(idx);
-			solution(idx + 1, selected + 1, str, countVowels + 1, countConsonants);
-		}
-		else {
-			str.at(selected) = input.at(idx);
-			solution(idx + 1, selected + 1, str, countVowels, countConsonants + 1);
-		}
+
+	if (isVowel(input.at(idx))) {
+		str.at(selected) = input.at(idx);
+		solution(idx + 1, selected + 1, str, countVowels + 1, countConsonants);
+	}
+	else {
+		str.at(selected) = input.at(idx);
+		solution(idx + 1, selected + 1, str, countVowels, countConsonants + 1);
 	}
 	str.at(selected) = ' ';
 	solution(idx + 1, selected, str, countVowels, countConsonants);

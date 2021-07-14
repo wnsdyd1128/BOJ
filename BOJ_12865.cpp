@@ -11,6 +11,8 @@ typedef vector<ii> vii;
 typedef vector<int> vi;
 // index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
 // index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
+
+// 배낭 문제(Knapsack problem)
 int N, K;
 vii v;
 int dp[MAX_N + 1][MAX_K + 1];

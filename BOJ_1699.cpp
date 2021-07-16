@@ -12,6 +12,7 @@ typedef vector<int> vi;
 // index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
 int N;
 int dp[MAX_N + 1];
+//Top-Down
 int solution(int n) {
 	if (n == 0)
 		return 0;
@@ -28,6 +29,7 @@ int solution(int n) {
 	}
 	return ret;
 }
+
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
@@ -35,4 +37,19 @@ int main() {
 	memset(dp, -1, sizeof dp);
 	cin >> N;
 	cout << solution(N) << endl;
+
+
+	// Bottom-Up
+	/*dp[1] = 1;
+	for (int i = 1; i <= N; i++) {
+		for (int j = 1; j * j < i; j++) {
+			if (dp[i] != -1) {
+				dp[i] = min(dp[i], 1 + dp[i - (j * j)]);
+			}
+			else {
+				dp[i] = 1 + dp[i - (j * j)];
+			}
+		}
+	}
+	cout << dp[N] << endl;*/
 }

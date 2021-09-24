@@ -10,7 +10,7 @@ typedef vector<int> vi;
 // index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
 // index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
 bool matrix[MAX][MAX];
-vector<int> g[MAX];
+vector<vi> g;
 vector<ii> edges;
 int main() {
 	ios_base::sync_with_stdio(false);
@@ -18,7 +18,8 @@ int main() {
 	cout.tie(NULL);
 	int N, M;
 	cin >> N >> M;
-	while (M--) {
+	g.resize(N + 1);
+	for (int i = 0; i < M; i++) {
 		int from, to;
 		cin >> from >> to;
 		matrix[from][to] = matrix[to][from] = true;
@@ -34,12 +35,11 @@ int main() {
 			int B = edges[i].second;
 			int C = edges[j].first;
 			int D = edges[j].second;
-			if (A == B || A == C || A == D || B == C || B == D)
+			if (A == B || A == C || A == D || B == C || B == D || C == D)
 				continue;
 			if (!matrix[B][C])
 				continue;
-			for (int k = 0; k < g[D].size(); i++) {
-				int E = g[D][k];
+			for (int E : g[D]) {
 				if (A == E || B == E || C == E || D == E)
 					continue;
 				cout << 1 << endl;

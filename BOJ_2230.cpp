@@ -28,4 +28,5 @@ int main() {
 			ans.push_back(*lower_bound(v.begin() + i, v.end(), v[i] + m) - v[i]);
 	}
 	sort(ans.begin(), ans.end());
+	cout << ans[0] << endl;
 }

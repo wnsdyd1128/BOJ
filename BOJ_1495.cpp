@@ -17,6 +17,7 @@ int N, S, M;
 int dp[MAX_N + 1][MAX_M + 1];
 vi v;
 int solution(int idx, int sum) { // -1 -> 탐색 전, -INF -> 불가능
+	// dp[idx][sum] : idx에서 현재 볼륨이 sum일 때의 가능한 최대 볼륨
 	if (sum < 0 || sum > M)
 		return -INF;
 	if (idx == N)

@@ -745,6 +745,7 @@
     <ClCompile Include="BOJ_1495.cpp">
       <SubType>
       </SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="BOJ_1520.cpp">
       <SubType>

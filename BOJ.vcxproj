@@ -208,6 +208,7 @@
     <ClCompile Include="BOJ_1074.cpp">
       <SubType>
       </SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="BOJ_1076.cpp">
       <SubType>
@@ -1605,6 +1606,10 @@
     <ClCompile Include="BOJ_2750.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="BOJ_2751.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="BOJ_2775.cpp">
       <SubType>

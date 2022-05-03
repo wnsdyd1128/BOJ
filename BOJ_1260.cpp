@@ -10,51 +10,48 @@ typedef vector<ii> vii;
 typedef vector<int> vi;
 // index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
 // index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
-vector<vi> v;
 bool isVisited[MAX_N + 1];
+vi v[MAX_N + 1];
 queue<int> q;
-void dfs(int vertex) {
-	cout << vertex << ' ';
-	isVisited[vertex] = true;
-	for (int i = 0; i < v[vertex].size(); i++) {
-		if (!isVisited[v[vertex][i]]) {
-			dfs(v[vertex][i]);
-		}
+void dfs(int depth) {
+	isVisited[depth] = true;
+	cout << depth << ' ';
+	for(auto i : v[depth]) {
+		if (!isVisited[i])
+			dfs(i);
 	}
 }
-void bfs(int vertex) {
-	while (!q.empty()) {
-		vertex = q.front();
+
+void bfs() {
+	while(!q.empty()) {
+		int vertex = q.front();
 		cout << vertex << ' ';
 		q.pop();
-		for (auto i : v[vertex]) {
-			if (!isVisited[i]) {
-				isVisited[i] = true;
+		for(auto i : v[vertex]) {
+			if(!isVisited[i]) {
 				q.push(i);
+				isVisited[i] = true;
 			}
 		}
 	}
 }
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	int N, M, V;
-	cin >> N >> M >> V;
-	v.resize(N + 1);
-	while (M--) {
-		int start, to;
-		cin >> start >> to;
-		v[start].push_back(to);
-		v[to].push_back(start);
+	int N, M;
+	int start;
+	cin >> N >> M >> start;
+	while(M--) {
+		int from, to;
+		cin >> from >> to;
+		v[from].push_back(to);
+		v[to].push_back(from);
 	}
-	for (int i = 1; i <= N; i++) {
+	for(int i = 1; i <= N; i++) {
 		sort(v[i].begin(), v[i].end());
 	}
-	dfs(V);
+	dfs(start);
 	cout << endl;
+	q.push(start);
 	memset(isVisited, false, sizeof isVisited);
-	q.push(V);
-	isVisited[V] = true;
-	bfs(V);
+	isVisited[start] = true;
+	bfs();
 }

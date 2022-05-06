@@ -62,6 +62,7 @@ int main() {
 		for (int j = 0; j < M; j++) {
 			if (grid[i][j]) {
 				dfs(i, j);
+				//ans = max(ans, dfs(i, j));
 				ans = max(ans, cnt);
 				cnt = 0;
 			}

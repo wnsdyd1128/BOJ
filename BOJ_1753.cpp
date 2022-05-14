@@ -10,41 +10,40 @@ typedef vector<ii> vii;
 typedef vector<int> vi;
 // index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
 // index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
-vector<ii> v[MAX_V + 1];
-int d[MAX_V + 1];
+vii v[MAX_V + 1];
+int dist[MAX_V + 1];
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 	int V, E, st;
-	fill(d, d + MAX_V + 1, INF);
 	cin >> V >> E >> st;
-	while (E--) {
-		int start, to, weight;
-		cin >> start >> to >> weight;
-		v[start].push_back({ weight, to });
+	while(E--) {
+		int from, to, weight;
+		cin >> from >> to >> weight;
+		v[from].push_back(make_pair(weight, to));
 	}
-	priority_queue < ii, vii, greater<>> pq;
-	d[st] = 0;
-	pq.push({0, st});
-	while (!pq.empty()) {
-		auto cur = pq.top();
-		pq.pop();
-		int dist = cur.first, idx = cur.second;
-		if (d[idx] != dist)
+	fill(dist, dist + V + 1, INF);
+	dist[st] = 0;
+	priority_queue<ii, vii, greater<>> q;
+	q.push(make_pair(0, st));
+	while(!q.empty()) {
+		int weight = q.top().first;
+		int dest = q.top().second;
+		q.pop();
+		if (dist[dest] != weight)
 			continue;
-		for (auto i : v[idx]) {
-			int cost = i.first, nidx = i.second;
-			if (d[nidx] > cost + dist) {
-				d[nidx] = cost + dist;
-				pq.push({ d[nidx], nidx });
+		for(auto nxt : v[dest]) {
+			if(dist[nxt.second] > dist[dest] + nxt.first) {
+				dist[nxt.second] = dist[dest] + nxt.first;
+				q.push(make_pair(dist[nxt.second], nxt.second));
 			}
 		}
 	}
-	for (int i = 1; i <= V; i++) {
-		if (d[i] == INF)
+	for(int i = 1; i <= V; i++) {
+		if (dist[i] == INF)
 			cout << "INF" << endl;
 		else
-			cout << d[i] << endl;
+			cout << dist[i] << endl;
 	}
 }

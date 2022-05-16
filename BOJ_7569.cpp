@@ -4,17 +4,13 @@
 #define MAX_H 100
 #define MAX_M 100
 #define MAX_N 100
-#define _CRT_SECURE_NO_DEPRECATE
-#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
-#pragma warning(disable:4996)
 using namespace std;
 typedef long long ll;
 typedef pair<int, int> ii;
 typedef vector<ii> vii;
-typedef pair<int, ii> iii;
+typedef tuple<int, int, int> iii;
 typedef vector<int> vi;
-// index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
-// index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
+
 int grid[MAX_H + 1][MAX_N + 1][MAX_M + 1];
 int H, N, M;
 int dz[] = { 0, 0, 0, 0, -1, 1 };
@@ -54,21 +50,19 @@ int main() {
 			for (int j = 0; j < N; j++) {
 				for (int k = 0; k < M; k++) {
 					if (grid[i][j][k] == 1)
-						q.push(make_pair(i, make_pair(j, k)));
+						q.push(make_tuple(i, j, k));
 				}
 			}
 		}
 		while(!q.empty()) {
-			int z = q.front().first;
-			int y = q.front().second.first;
-			int x = q.front().second.second;
+			auto [z, y, x] = q.front();
 			q.pop();
 			for(int i = 0; i < 6; i++) {
 				int nz = z + dz[i];
 				int ny = y + dy[i];
 				int nx = x + dx[i];
 				if(canMove(nz, ny, nx)) {
-					q.push(make_pair(nz, make_pair(ny, nx)));
+					q.push(make_tuple(nz, ny, nx));
 					grid[nz][ny][nx] = grid[z][y][x] + 1;
 				}
 			}

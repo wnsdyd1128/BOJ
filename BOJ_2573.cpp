@@ -10,7 +10,6 @@ typedef vector<ii> vii;
 typedef vector<int> vi;
 int grid[MAX_N + 1][MAX_M + 1];
 bool isVisited[MAX_N + 1][MAX_M + 1];
-bool isLand[MAX_N + 1][MAX_M + 1];
 int dy[] = { 0, 0, -1, 1 };
 int dx[] = { 1, -1, 0, 0 };
 int N, M;

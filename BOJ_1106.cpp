@@ -1,46 +1,41 @@
 ﻿#include <bits/stdc++.h>
 #define endl '\n'
 #define INF 1000000000 // 10^9, Floyd-Warshall에선 20억보다 안전
-#define _CRT_SECURE_NO_DEPRECATE
+#define MAX_N 1000
 using namespace std;
 typedef long long ll;
 typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
-// index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
-// index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
-
-int dp[21][1001];
-int C, N;
+int dp[MAX_N + 1]; // dp[i] := i 만큼 고객을 확보했을 때의 최소 비용
+int N, C;
 vii v;
-int solution(int idx, int sum) {
-	if (sum >= C) {
+int solution(int sum) {
+	if (sum >= C)
 		return 0;
-	}
-	int& ret = dp[idx][sum];
+	int& ret = dp[sum];
 	if (ret != -1)
 		return ret;
-	for (int i = 0; i < N; i++) {
-		if (ret == -1) {
-			ret = solution(i + 1, sum + v.at(i).second) + v.at(i).first;
-		}
-		else {
-			ret = min(ret, solution(i + 1, sum + v.at(i).second) + v.at(i).first);
-		}
+	for(int i = 0; i < N; i++) {
+		auto [cost, customer] = v[i];
+		if (ret == -1)
+			ret = solution(sum + customer) + cost;
+		else
+			ret = min(ret, solution(sum + customer) + cost);
 	}
 	return ret;
 }
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	memset(dp, -1, sizeof dp);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
 	cin >> C >> N;
+	v.resize(N + 1);
+	memset(dp, -1, sizeof dp);
 	for (int i = 0; i < N; i++) {
 		int cost, customer;
 		cin >> cost >> customer;
-		v.push_back(make_pair(cost, customer));
+		v[i] = make_pair(cost, customer);
 	}
-	int ans = solution(0, 0);
-	cout << ans << endl;
+	cout << solution(0) << endl;
 }

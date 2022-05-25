@@ -1,48 +1,45 @@
 ﻿#include <bits/stdc++.h>
 #define endl '\n'
 #define INF 1000000000 // 10^9, Floyd-Warshall에선 20억보다 안전
-#define MAX 200000
-#define _CRT_SECURE_NO_DEPRECATE
+#define MAX_N 200000
 using namespace std;
 typedef long long ll;
 typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
-// index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
-// index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
-int dist[MAX + 1];
+bool isVisited[MAX_N + 1];
+bool canMove(int pos) {
+	if (0 <= pos && pos <= 200000 && !isVisited[pos])
+		return true;
+	return false;
+}
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
 	int N, K;
 	cin >> N >> K;
-	queue<int> q;
-	q.push(N);
-	memset(dist, -1, sizeof dist);
-	dist[N] = 0;
+	priority_queue<ii, vii, greater<>> q;
+	q.push(make_pair(0, N));
+	isVisited[N] = true;
 	while (!q.empty()) {
-		int pos = q.front();
+		auto [cnt, pos] = q.top();
 		q.pop();
-		if (pos - 1 >= 0) {
-			if (dist[pos - 1] == -1) {
-				dist[pos - 1] = dist[pos] + 1;
-				q.push(pos - 1);
-			}
+		if (pos == K) {
+			cout << cnt << endl;
+			return 0;
 		}
-		if (pos + 1 <= MAX) {
-			if (dist[pos + 1] == -1) {
-				dist[pos + 1] = dist[pos] + 1;
-				q.push(pos + 1);
-			}
-				
+		if (canMove(pos - 1)) {
+			q.push(make_pair(cnt + 1, pos - 1));
+			isVisited[pos - 1] = true;
 		}
-		if (2 * pos <= MAX) {
-			if (dist[pos * 2] == -1) {
-				dist[pos * 2] = dist[pos] + 1;
-				q.push(pos * 2);
-			}
+		if (canMove(2 * pos)) {
+			q.push(make_pair(cnt + 1, 2 * pos));
+			isVisited[2 * pos] = true;
+		}
+		if (canMove(pos + 1)) {
+			q.push(make_pair(cnt + 1, pos + 1));
+			isVisited[pos + 1] = true;
 		}
 	}
-	cout << dist[K] << endl;
 }

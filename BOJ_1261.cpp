@@ -1,54 +1,65 @@
 ﻿#include <bits/stdc++.h>
 #define endl '\n'
-#define MAX 100
-#define _CRT_SECURE_NO_DEPRECATE
-#pragma warning(disable:4996)
+#define INF 1000000000 // 10^9, Floyd-Warshall에선 20억보다 안전
+#define MAX_N 100
+#define MAX_M 100
 using namespace std;
 typedef long long ll;
 typedef pair<int, int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
-// index = (index + 1 ) % n;		// index++; if (index >= n) index = 0;
-// index = (index + n - 1 ) % n;	// index--; if (index < 0) index = n - 1;
-
+typedef tuple<int, int, int> tp;
+typedef vector<tp> vtp;
 int dx[] = { 0, 0, 1, -1 };
 int dy[] = { 1, -1, 0, 0 };
-int dist[MAX + 1][MAX + 1];
-int maze[MAX + 1][MAX + 1];
-int M, N;
-bool canMove(int x, int y) {
-	if (x <= 0 || y <= 0 || x > N || y > M)
-		return false;
-	return true;
+int grid[MAX_N + 1][MAX_M + 1];
+bool isVisited[MAX_N + 1][MAX_M + 1];
+int N, M;
+bool canMove(int y, int x) {
+	if (0 <= y && y < N && 0 <= x && x < M && !isVisited[y][x])
+		return true;
+	return false;
 }
-int main() {
-	scanf("%d %d", &M, &N);
-	for (int i = 1; i <= N; i++) {
-		for (int j = 1; j <= M; j++) {
-			scanf("%1d", &maze[i][j]);
-		}
-	}
-	memset(dist, -1, sizeof dist);
-	dist[1][1] = 0;
-	deque<ii> q;
-	q.push_back({ 1, 1 });
+
+void bfs(int y, int x) {
+	priority_queue<tp, vtp, greater<>> q;
+	q.push(make_tuple(0, y, x));
+	isVisited[y][x] = true;
 	while (!q.empty()) {
-		ii pos = q.front();
-		q.pop_front();
+		auto [cnt, curY, curX] = q.top();
+		q.pop();
+		if (curY == N - 1 && curX == M - 1) {
+			cout << cnt << endl;
+			return;
+		}
 		for (int i = 0; i < 4; i++) {
-			int nx = pos.first + dx[i];
-			int ny = pos.second + dy[i];
-			if (canMove(nx, ny) && dist[nx][ny] == -1) {
-				if (maze[nx][ny] == 0) {
-					dist[nx][ny] = dist[pos.first][pos.second];
-					q.push_front({ nx, ny });
+			int ny = curY + dy[i];
+			int nx = curX + dx[i];
+			if (canMove(ny, nx)) {
+				if (grid[ny][nx] == 1) {
+					q.push(make_tuple(cnt + 1, ny, nx));
+					isVisited[ny][nx] = true;
 				}
-				if (maze[nx][ny] == 1) {
-					dist[nx][ny] = dist[pos.first][pos.second] + 1;
-					q.push_back({ nx, ny });
+				else {
+					q.push(make_tuple(cnt, ny, nx));
+					isVisited[ny][nx] = true;
 				}
 			}
 		}
 	}
-	cout << dist[N][M] << endl;
+}
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	cin >> M >> N;
+	for (int i = 0; i < N; i++) {
+		string str;
+		cin >> str;
+		for (int j = 0; j < M; j++) {
+			int state = str[j] - '0';
+			grid[i][j] = state;
+		}
+	}
+	bfs(0, 0);
 }

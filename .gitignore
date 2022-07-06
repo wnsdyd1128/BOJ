@@ -378,3 +378,6 @@ FodyWeavers.xsd
 /BOJ_15712(US).cpp
 /BOJ_23085.cpp
 /BOJ_1655.cpp
+BOJ_23087
+BOJ_*
+!/*.cpp

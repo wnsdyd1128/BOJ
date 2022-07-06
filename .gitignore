@@ -361,6 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+BOJ_*
+!/*.cpp
 /BOJ_9095(US).cpp
 /BOJ_1106(US).cpp
 /BOJ_2293.cpp
@@ -378,3 +380,4 @@ FodyWeavers.xsd
 /BOJ_15712(US).cpp
 /BOJ_23085.cpp
 /BOJ_1655.cpp
+

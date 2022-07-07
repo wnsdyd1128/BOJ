@@ -3,5 +3,12 @@
   "C_Cpp_Runner.cppCompilerPath": "C:\\mingw64\\bin\\g++.exe",
   "C_Cpp_Runner.debuggerPath": "C:\\mingw64\\bin\\gdb.exe",
   "C_Cpp_Runner.makePath": "C:\\mingw64\\bin\\mingw32-make.exe",
+<<<<<<< HEAD
   "cmake.configureOnOpen": false
+=======
+  "cmake.configureOnOpen": false,
+  "files.associations": {
+    "tuple": "cpp"
+  }
+>>>>>>> 8dda93ad7b5264740437248f1526a9e1f5c319e5
 }
